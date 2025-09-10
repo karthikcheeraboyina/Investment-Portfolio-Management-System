@@ -28,17 +28,41 @@ public class Asset {
     private BigDecimal purchasePrice;
 
     // Getters and setters
-    public Long getAssetId() { return assetId; }
-    public void setAssetId(Long assetId) { this.assetId = assetId; }
-    public Portfolio getPortfolio() { return portfolio; }
-    public void setPortfolio(Portfolio portfolio) { this.portfolio = portfolio; }
-    public AssetType getAssetType() { return assetType; }
-    public void setAssetType(AssetType assetType) { this.assetType = assetType; }
-    public String getAssetName() { return assetName; }
-    public void setAssetName(String assetName) { this.assetName = assetName; }
-    public BigDecimal getQuantity() { return quantity; }
-    public void setQuantity(BigDecimal quantity) { this.quantity = quantity; }
-    public BigDecimal getPurchasePrice() { return purchasePrice; }
-    public void setPurchasePrice(BigDecimal purchasePrice) { this.purchasePrice = purchasePrice; }
+    public Long getAssetId() {
+        return assetId;
+    }
+    public void setAssetId(Long assetId) {
+        this.assetId = assetId;
+    }
+    public Portfolio getPortfolio() {
+        return portfolio;
+    }
+    public void setPortfolio(Portfolio portfolio) {
+        this.portfolio = portfolio;
+    }
+    public AssetType getAssetType() {
+        return assetType;
+    }
+    public void setAssetType(AssetType assetType) {
+        this.assetType = assetType;
+    }
+    public String getAssetName() {
+        return assetName;
+    }
+    public void setAssetName(String assetName) {
+        this.assetName = assetName;
+    }
+    public BigDecimal getQuantity() {
+        return quantity;
+    }
+    public void setQuantity(BigDecimal quantity) {
+        this.quantity = quantity;
+    }
+    public BigDecimal getPurchasePrice() {
+        return purchasePrice;
+    }
+    public void setPurchasePrice(BigDecimal purchasePrice) {
+        this.purchasePrice = purchasePrice;
+    }
 }
 

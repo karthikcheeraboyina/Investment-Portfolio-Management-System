@@ -30,14 +30,34 @@ public class Portfolio {
     }
 
     // Getters and setters
-    public Long getPortfolioId() { return portfolioId; }
-    public void setPortfolioId(Long portfolioId) { this.portfolioId = portfolioId; }
-    public Long getUserId() { return userId; }
-    public void setUserId(Long userId) { this.userId = userId; }
-    public String getPortfolioName() { return portfolioName; }
-    public void setPortfolioName(String portfolioName) { this.portfolioName = portfolioName; }
-    public LocalDateTime getCreationDate() { return creationDate; }
-    public void setCreationDate(LocalDateTime creationDate) { this.creationDate = creationDate; }
-    public List<Asset> getAssets() { return assets; }
-    public void setAssets(List<Asset> assets) { this.assets = assets; }
+    public Long getPortfolioId() {
+        return portfolioId;
+    }
+    public void setPortfolioId(Long portfolioId) {
+        this.portfolioId = portfolioId;
+    }
+    public Long getUserId() {
+        return userId;
+    }
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+    public String getPortfolioName() {
+        return portfolioName;
+    }
+    public void setPortfolioName(String portfolioName) {
+        this.portfolioName = portfolioName;
+    }
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+    public List<Asset> getAssets() {
+        return assets;
+    }
+    public void setAssets(List<Asset> assets) {
+        this.assets = assets;
+    }
 }
