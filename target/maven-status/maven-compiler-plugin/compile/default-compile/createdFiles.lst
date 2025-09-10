@@ -1,0 +1,8 @@
+com\example\ipmsBackend\IpmsBackendApplication.class
+com\example\ipmsBackend\entity\Portfolio.class
+com\example\ipmsBackend\entity\Asset.class
+com\example\ipmsBackend\entity\AssetType.class
+com\example\ipmsBackend\service\PortfolioService.class
+com\example\ipmsBackend\repository\PortfolioRepository.class
+com\example\ipmsBackend\controller\PortfolioController.class
+com\example\ipmsBackend\repository\AssetRepository.class
