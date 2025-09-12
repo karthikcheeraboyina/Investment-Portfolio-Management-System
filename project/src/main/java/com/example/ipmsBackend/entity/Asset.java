@@ -1,17 +1,25 @@
 package com.example.ipmsBackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.math.BigDecimal;
 
 @Entity
 public class Asset {
 
+    // Getters and setters
+    @Setter
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long assetId;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "portfolio_id", nullable = false)
+    @JsonIgnore
     private Portfolio portfolio;
 
     @Enumerated(EnumType.STRING)
@@ -27,13 +35,17 @@ public class Asset {
     @Column(nullable = false, precision = 19, scale = 4)
     private BigDecimal purchasePrice;
 
-    // Getters and setters
-    public Long getAssetId() {
-        return assetId;
+    @Column(nullable = false, precision = 19, scale = 4)
+    private BigDecimal currentPrice;
+
+    public BigDecimal getCurrentPrice() {
+        return currentPrice;
     }
-    public void setAssetId(Long assetId) {
-        this.assetId = assetId;
+
+    public void setCurrentPrice(BigDecimal currentPrice) {
+        this.currentPrice = currentPrice;
     }
+
     public Portfolio getPortfolio() {
         return portfolio;
     }
