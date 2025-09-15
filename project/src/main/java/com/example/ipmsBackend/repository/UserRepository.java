@@ -1,6 +1,5 @@
 package com.example.ipmsBackend.repository;
 
-
 import com.example.ipmsBackend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,8 +22,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findByRole(User.UserRole role);
 
-    @Query("SELECT u FROM User u WHERE u.username LIKE %:keyword% OR u.email LIKE %:keyword%")
-    List<User> findByUsernameOrEmailContaining(@Param("keyword") String keyword);
+    // This method will now work with the UserService call
+    List<User> findByUsernameContainingOrEmailContaining(String keyword, String keyword2);
 
     @Query("SELECT COUNT(u) FROM User u WHERE u.role = :role")
     long countByRole(@Param("role") User.UserRole role);
