@@ -63,9 +63,9 @@ public class UserService {
         return userRepository.findById(userId);
     }
 
-    public Optional<User> getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
+//    public Optional<User> getUserByUsername(String username) {
+//        return userRepository.findByUsername(username);
+//    }
 
     public List<User> getUsersByRole(User.UserRole role) {
         return userRepository.findByRole(role);
