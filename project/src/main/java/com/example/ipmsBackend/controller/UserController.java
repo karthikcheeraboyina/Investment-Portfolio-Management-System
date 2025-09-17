@@ -47,7 +47,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
-/*
+
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
@@ -82,5 +82,5 @@ public class UserController {
     public ResponseEntity<Long> getUsersCountByRole(@PathVariable User.UserRole role) {
         long count = userService.getUsersCountByRole(role);
         return ResponseEntity.ok(count);
-    }*/
+    }
 }
