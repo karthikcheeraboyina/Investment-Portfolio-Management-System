@@ -2,10 +2,9 @@ package com.example.ipmsBackend.controller;
 
 import com.example.ipmsBackend.entity.User;
 import com.example.ipmsBackend.service.UserService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
 
 import jakarta.validation.Valid;
 import java.util.List;
@@ -13,17 +12,21 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/user")
-@RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 public class UserController {
 
     private final UserService userService;
 
+    // This is the single, manual constructor for dependency injection
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@Valid @RequestBody User user) {
         try {
             User registeredUser = userService.registerUser(user);
-            return ResponseEntity.ok(registeredUser);
+            return ResponseEntity.status(HttpStatus.CREATED).body(registeredUser);
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().build();
         }
@@ -32,15 +35,8 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<User> loginUser(@RequestParam String username, @RequestParam String password) {
         Optional<User> user = userService.loginUser(username, password);
-        return user.map(ResponseEntity::ok).orElse(ResponseEntity.status(401).build());
+        return user.map(ResponseEntity::ok).orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }
-//    @PostMapping("/login")
-//    public ResponseEntity<User> loginUser(@RequestBody LoginRequest loginRequest) {
-//        Optional<User> userOpt = userService.loginUser(loginRequest.getUsername(), loginRequest.getPassword());
-//        return userOpt.map(ResponseEntity::ok)
-//                .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
-//    }
-
 
     @PutMapping("/{userId}/update")
     public ResponseEntity<User> updateUserProfile(@PathVariable Long userId, @Valid @RequestBody User updatedUser) {
@@ -48,7 +44,7 @@ public class UserController {
             User user = userService.updateUserProfile(userId, updatedUser);
             return ResponseEntity.ok(user);
         } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
@@ -79,7 +75,7 @@ public class UserController {
     @DeleteMapping("/{userId}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
         userService.deleteUser(userId);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/stats/role/{role}")

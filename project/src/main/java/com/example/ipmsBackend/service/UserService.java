@@ -1,10 +1,7 @@
 package com.example.ipmsBackend.service;
 
-
-
 import com.example.ipmsBackend.entity.User;
 import com.example.ipmsBackend.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,11 +9,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
 public class UserService {
 
     private final UserRepository userRepository;
+
+    // This is the manually written constructor for dependency injection
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public User registerUser(User user) {
         if (userRepository.existsByUsername(user.getUsername())) {
@@ -25,8 +26,6 @@ public class UserService {
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new RuntimeException("Email already exists");
         }
-
-        user.setPassword(user.getPassword());
         return userRepository.save(user);
     }
 
@@ -64,16 +63,16 @@ public class UserService {
         return userRepository.findById(userId);
     }
 
-    public Optional<User> getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
+//    public Optional<User> getUserByUsername(String username) {
+//        return userRepository.findByUsername(username);
+//    }
 
     public List<User> getUsersByRole(User.UserRole role) {
         return userRepository.findByRole(role);
     }
 
     public List<User> searchUsers(String keyword) {
-        return userRepository.findByUsernameOrEmailContaining(keyword);
+        return userRepository.findByUsernameContainingOrEmailContaining(keyword, keyword);
     }
 
     public void deleteUser(Long userId) {
