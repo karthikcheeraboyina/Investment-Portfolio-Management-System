@@ -55,7 +55,7 @@ public class UserService {
         return userRepository.save(existingUser);
     }
 
-    public List<User> getAllUsers() {
+   /* public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
@@ -82,4 +82,5 @@ public class UserService {
     public long getUsersCountByRole(User.UserRole role) {
         return userRepository.countByRole(role);
     }
+*/
 }

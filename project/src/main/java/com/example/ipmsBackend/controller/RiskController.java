@@ -3,12 +3,13 @@ package com.example.ipmsBackend.controller;
 import com.example.ipmsBackend.entity.Risk;
 import com.example.ipmsBackend.service.RiskService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 @RequestMapping("/api/risk")
 public class RiskController {
 
