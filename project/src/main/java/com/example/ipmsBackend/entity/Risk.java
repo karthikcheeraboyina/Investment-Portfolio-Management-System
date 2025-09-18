@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "risk")
+//@Table(name = "risk")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,7 +17,7 @@ public class Risk {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long RiskId;
 
-    @JoinColumn(name = "portfolio_id", nullable = false)
+    @JoinColumn(name = "portfolio_id", nullable = true)
     @ManyToOne(fetch = FetchType.LAZY)
     private Portfolio portfolio;
 

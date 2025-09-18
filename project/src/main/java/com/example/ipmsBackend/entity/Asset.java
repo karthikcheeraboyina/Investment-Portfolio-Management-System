@@ -2,8 +2,7 @@ package com.example.ipmsBackend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+
 
 import java.math.BigDecimal;
 
@@ -11,8 +10,6 @@ import java.math.BigDecimal;
 public class Asset {
 
     // Getters and setters
-    @Setter
-    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long assetId;
@@ -37,10 +34,6 @@ public class Asset {
 
     @Column(nullable = false, precision = 19, scale = 4)
     private BigDecimal currentPrice;
-
-    public BigDecimal getCurrentPrice() {
-        return currentPrice;
-    }
 
     public void setCurrentPrice(BigDecimal currentPrice) {
         this.currentPrice = currentPrice;

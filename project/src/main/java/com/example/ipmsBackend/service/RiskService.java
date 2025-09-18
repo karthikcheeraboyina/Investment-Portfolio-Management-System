@@ -1,12 +1,15 @@
 package com.example.ipmsBackend.service;
 
 import com.example.ipmsBackend.entity.Asset;
+import com.example.ipmsBackend.entity.Portfolio;
 import com.example.ipmsBackend.entity.Risk;
 import com.example.ipmsBackend.repository.AssetRepository;
+import com.example.ipmsBackend.repository.PortfolioRepository;
 import com.example.ipmsBackend.repository.RiskRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,10 +18,12 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional
 public class RiskService {
-     private RiskRepository riskRepository;
-     private AssetRepository assetRepository;
-
+     private final RiskRepository riskRepository;
+     private final AssetRepository assetRepository;
+     private final PortfolioRepository portfolioRepository;
      public Risk CalculateRisk(Long portfolioId){
+         Portfolio portfolio = portfolioRepository.findById(portfolioId)
+                 .orElseThrow(() -> new IllegalArgumentException("Portfolio not found with ID: " + portfolioId));
          List<Asset> assets=assetRepository.findByPortfolio_PortfolioId(portfolioId);
          if(assets.isEmpty()){
              throw new IllegalArgumentException("No assets found for the given portfolio ID");
@@ -56,9 +61,10 @@ public class RiskService {
 
           Risk risk =new Risk();
           risk.setRiskLevel(riskLevel);
-
+          risk.setPortfolio(portfolio);
           return riskRepository.save(risk);
      }
+
 
      public Risk ViewRiskAnalysis(Long portfolioId){
          Optional<Risk> latestRisk=riskRepository.findLatestByPortfolio_PortfolioId(portfolioId);
