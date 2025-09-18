@@ -82,4 +82,5 @@ public class UserService {
     public long getUsersCountByRole(User.UserRole role) {
         return userRepository.countByRole(role);
     }
+
 }
