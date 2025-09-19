@@ -3,7 +3,7 @@ package com.example.ipmsBackend.service;
 import com.example.ipmsBackend.entity.Report;
 
 import java.util.List;
-
+//
 public interface ReportService {
     Report generatePortfolioReport(Long portfolioId, String reportTitle);
     Report generateRiskReport(Long portfolioId, String reportTitle);
