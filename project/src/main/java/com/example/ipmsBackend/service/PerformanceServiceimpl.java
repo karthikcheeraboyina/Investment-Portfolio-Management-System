@@ -35,7 +35,7 @@ public class PerformanceServiceimpl implements PerformanceService {
         Performance performance = performanceRepository.findByAsset_AssetId(assetId)
                 .orElse(new Performance());
 
-        // --- CORE CALCULATION LOGIC ---
+
 
         // Calculate the total cost of the initial purchase.
         // totalPurchaseCost = purchasePrice * quantity
@@ -49,7 +49,7 @@ public class PerformanceServiceimpl implements PerformanceService {
         // profitLoss = totalCurrentValue - totalPurchaseCost
         BigDecimal profitLoss = totalCurrentValue.subtract(totalPurchaseCost);
 
-        // --- UPDATE AND SAVE ---
+
 
         // 3. Update the asset's current price for consistency.
         asset.setCurrentPrice(newCurrentPrice);
