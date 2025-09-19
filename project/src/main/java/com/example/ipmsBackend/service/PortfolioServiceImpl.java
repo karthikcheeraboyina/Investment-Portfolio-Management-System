@@ -4,6 +4,7 @@ import com.example.ipmsBackend.entity.Asset;
 import com.example.ipmsBackend.entity.Portfolio;
 import com.example.ipmsBackend.repository.AssetRepository;
 import com.example.ipmsBackend.repository.PortfolioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,12 +12,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PortfolioServiceimpl implements PortfolioService {
+public class PortfolioServiceImpl implements PortfolioService {
 
     private final PortfolioRepository portfolioRepository;
     private final AssetRepository assetRepository;
-
-    public PortfolioServiceimpl(PortfolioRepository portfolioRepository, AssetRepository assetRepository) {
+    @Autowired
+    public PortfolioServiceImpl(PortfolioRepository portfolioRepository, AssetRepository assetRepository) {
         this.portfolioRepository = portfolioRepository;
         this.assetRepository = assetRepository;
     }

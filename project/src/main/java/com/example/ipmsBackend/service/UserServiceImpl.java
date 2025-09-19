@@ -10,12 +10,12 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class UserServiceimpl implements UserService {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
     // This is the manually written constructor for dependency injection
-    public UserServiceimpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

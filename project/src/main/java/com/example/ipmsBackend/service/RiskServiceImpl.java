@@ -16,7 +16,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class RiskServiceimpl implements RiskService {
+public class RiskServiceImpl implements RiskService {
      private final RiskRepository riskRepository;
      private final AssetRepository assetRepository;
      private final PortfolioRepository portfolioRepository;

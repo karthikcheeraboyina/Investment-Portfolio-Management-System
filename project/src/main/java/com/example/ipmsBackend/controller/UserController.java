@@ -1,7 +1,7 @@
 package com.example.ipmsBackend.controller;
 
 import com.example.ipmsBackend.entity.User;
-import com.example.ipmsBackend.service.UserServiceimpl;
+import com.example.ipmsBackend.service.UserServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -15,10 +15,10 @@ import java.util.Optional;
 @CrossOrigin(origins = "*")
 public class UserController {
 
-    private final UserServiceimpl userService;
+    private final UserServiceImpl userService;
 
     // This is the single, manual constructor for dependency injection
-    public UserController(UserServiceimpl userService) {
+    public UserController(UserServiceImpl userService) {
         this.userService = userService;
     }
 

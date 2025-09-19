@@ -1,7 +1,7 @@
 package com.example.ipmsBackend.controller;
 
 import com.example.ipmsBackend.entity.Risk;
-import com.example.ipmsBackend.service.RiskServiceimpl;
+import com.example.ipmsBackend.service.RiskServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,9 +11,9 @@ import java.util.List;
 @RequestMapping("/api/risk")
 public class RiskController {
 
-    private final RiskServiceimpl riskService;
+    private final RiskServiceImpl riskService;
 
-    public RiskController(RiskServiceimpl riskService) {
+    public RiskController(RiskServiceImpl riskService) {
         this.riskService = riskService;
     }
 

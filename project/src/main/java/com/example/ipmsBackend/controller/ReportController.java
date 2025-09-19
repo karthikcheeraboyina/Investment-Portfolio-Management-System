@@ -2,7 +2,7 @@
 package com.example.ipmsBackend.controller;
 
 import com.example.ipmsBackend.entity.Report;
-import com.example.ipmsBackend.service.ReportServiceimpl;
+import com.example.ipmsBackend.service.ReportServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public class ReportController {
 
     @Autowired
-    private ReportServiceimpl reportService;
+    private ReportServiceImpl reportService;
 
     @PostMapping("/portfolio/{portfolioId}")
     public Report generatePortfolioReport(@PathVariable Long portfolioId, @RequestParam(required = false) String reportTitle) {

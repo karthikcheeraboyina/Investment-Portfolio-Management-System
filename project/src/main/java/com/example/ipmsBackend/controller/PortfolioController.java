@@ -2,7 +2,7 @@ package com.example.ipmsBackend.controller;
 
 import com.example.ipmsBackend.entity.Asset;
 import com.example.ipmsBackend.entity.Portfolio;
-import com.example.ipmsBackend.service.PortfolioServiceimpl;
+import com.example.ipmsBackend.service.PortfolioServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +13,9 @@ import java.util.List;
 @RequestMapping("/api/portfolios")
 public class PortfolioController {
 
-    private final PortfolioServiceimpl service;
+    private final PortfolioServiceImpl service;
 
-    public PortfolioController(PortfolioServiceimpl service) {
+    public PortfolioController(PortfolioServiceImpl service) {
         this.service = service;
     }
 

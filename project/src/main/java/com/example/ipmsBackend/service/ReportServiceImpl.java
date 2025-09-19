@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ReportServiceimpl implements ReportService {
+public class ReportServiceImpl implements ReportService {
 
     @Autowired
     private ReportRepository reportRepository;

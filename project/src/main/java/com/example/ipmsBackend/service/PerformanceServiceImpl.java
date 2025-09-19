@@ -13,13 +13,13 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Service
-public class PerformanceServiceimpl implements PerformanceService {
+public class PerformanceServiceImpl implements PerformanceService {
 
     private final AssetRepository assetRepository;
     private final PerformanceRepository performanceRepository;
 
     @Autowired
-    public PerformanceServiceimpl(AssetRepository assetRepository, PerformanceRepository performanceRepository) {
+    public PerformanceServiceImpl(AssetRepository assetRepository, PerformanceRepository performanceRepository) {
         this.assetRepository = assetRepository;
         this.performanceRepository = performanceRepository;
     }
