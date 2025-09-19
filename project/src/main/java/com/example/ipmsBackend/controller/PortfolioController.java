@@ -2,7 +2,7 @@ package com.example.ipmsBackend.controller;
 
 import com.example.ipmsBackend.entity.Asset;
 import com.example.ipmsBackend.entity.Portfolio;
-import com.example.ipmsBackend.service.PortfolioService;
+import com.example.ipmsBackend.service.PortfolioServiceimpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +13,9 @@ import java.util.List;
 @RequestMapping("/api/portfolios")
 public class PortfolioController {
 
-    private final PortfolioService service;
+    private final PortfolioServiceimpl service;
 
-    public PortfolioController(PortfolioService service) {
+    public PortfolioController(PortfolioServiceimpl service) {
         this.service = service;
     }
 
@@ -49,7 +49,7 @@ public class PortfolioController {
 
     @DeleteMapping("/delete/{portfolioId}")
     public ResponseEntity<Void> deletePortfolio(@PathVariable Long portfolioId){
-        service.deleteportfolios(portfolioId);
+        service.deletePortfolio(portfolioId);
         return ResponseEntity.ok().build();
     }
 }

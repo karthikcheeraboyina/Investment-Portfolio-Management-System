@@ -1,7 +1,7 @@
 package com.example.ipmsBackend.controller;
 
 import com.example.ipmsBackend.entity.Performance;
-import com.example.ipmsBackend.service.PerformanceService;
+import com.example.ipmsBackend.service.PerformanceServiceimpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
@@ -10,10 +10,10 @@ import java.math.BigDecimal;
 @RequestMapping("/api/performance")
 public class PerformanceController {
 
-    private final PerformanceService performanceService;
+    private final PerformanceServiceimpl performanceService;
 
     // Use constructor injection - it's the recommended practice
-    public PerformanceController(PerformanceService performanceService) {
+    public PerformanceController(PerformanceServiceimpl performanceService) {
         this.performanceService = performanceService;
     }
 

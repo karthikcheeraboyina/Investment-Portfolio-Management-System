@@ -1,17 +1,19 @@
 package com.example.ipmsBackend.controller;
 
 import com.example.ipmsBackend.entity.Risk;
-import com.example.ipmsBackend.service.RiskService;
+import com.example.ipmsBackend.service.RiskServiceimpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/risk")
 public class RiskController {
 
-    private final RiskService riskService;
+    private final RiskServiceimpl riskService;
 
-    public RiskController(RiskService riskService) {
+    public RiskController(RiskServiceimpl riskService) {
         this.riskService = riskService;
     }
 
@@ -25,13 +27,10 @@ public class RiskController {
         }
     }
 
-    public ResponseEntity<Risk> ViewRiskAnalysis(@PathVariable Long portfolioId){
-        try{
-            Risk risk=riskService.ViewRiskAnalysis(portfolioId);
 
-            return ResponseEntity.ok(risk);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().build();
-        }
+
+    @GetMapping
+    public List<Risk> GetAllRisk(){
+        return riskService.getAllRisks();
     }
 }

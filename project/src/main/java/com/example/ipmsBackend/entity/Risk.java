@@ -1,5 +1,6 @@
 package com.example.ipmsBackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,6 +20,7 @@ public class Risk {
 
     @JoinColumn(name = "portfolio_id", nullable = true)
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Portfolio portfolio;
 
     @Enumerated(EnumType.STRING)

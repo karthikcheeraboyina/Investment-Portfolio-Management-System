@@ -1,11 +1,14 @@
 package com.example.ipmsBackend.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "Performance")
+@Data
 public class Performance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,43 +33,43 @@ public class Performance {
         this.lastUpdated = lastUpdated;
     }
 
-    public Long getPerformanceId() {
-        return performanceId;
-    }
-
-    public void setPerformanceId(Long performanceId) {
-        this.performanceId = performanceId;
-    }
-
-    public BigDecimal getCurrentValue() {
-        return currentValue;
-    }
-
-    public void setCurrentValue(BigDecimal currentValue) {
-        this.currentValue = currentValue;
-    }
-
-    public BigDecimal getProfitLoss() {
-        return profitLoss;
-    }
-
-    public void setProfitLoss(BigDecimal profitLoss) {
-        this.profitLoss = profitLoss;
-    }
-
-    public LocalDate getLastUpdated() {
-        return lastUpdated;
-    }
-
-    public void setLastUpdated(LocalDate lastUpdated) {
-        this.lastUpdated = lastUpdated;
-    }
-
-    public Asset getAsset() {
-        return asset;
-    }
-
-    public void setAsset(Asset asset) {
-        this.asset = asset;
-    }
+//    public Long getPerformanceId() {
+//        return performanceId;
+//    }
+//
+//    public void setPerformanceId(Long performanceId) {
+//        this.performanceId = performanceId;
+//    }
+//
+//    public BigDecimal getCurrentValue() {
+//        return currentValue;
+//    }
+//
+//    public void setCurrentValue(BigDecimal currentValue) {
+//        this.currentValue = currentValue;
+//    }
+//
+//    public BigDecimal getProfitLoss() {
+//        return profitLoss;
+//    }
+//
+//    public void setProfitLoss(BigDecimal profitLoss) {
+//        this.profitLoss = profitLoss;
+//    }
+//
+//    public LocalDate getLastUpdated() {
+//        return lastUpdated;
+//    }
+//
+//    public void setLastUpdated(LocalDate lastUpdated) {
+//        this.lastUpdated = lastUpdated;
+//    }
+//
+//    public Asset getAsset() {
+//        return asset;
+//    }
+//
+//    public void setAsset(Asset asset) {
+//        this.asset = asset;
+//    }
 }

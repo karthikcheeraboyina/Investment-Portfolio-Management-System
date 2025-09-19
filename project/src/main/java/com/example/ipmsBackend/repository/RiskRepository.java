@@ -14,4 +14,5 @@ public interface RiskRepository extends JpaRepository<Risk, Long> {
 
       Optional<Risk> findLatestByPortfolio_PortfolioId(@Param("portfolioId") Long portfolioId);
 
+
 }
