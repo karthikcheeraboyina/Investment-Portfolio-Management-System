@@ -38,5 +38,18 @@ public class Asset {
 
     @Column(nullable = false, precision = 19, scale = 4)
     private BigDecimal currentPrice;
+
+    @Override
+    public String toString() {
+        return "Asset{" +
+                "assetId=" + assetId +
+                ", portfolio=" + portfolio +
+                ", assetType=" + assetType +
+                ", assetName='" + assetName + '\'' +
+                ", quantity=" + quantity +
+                ", purchasePrice=" + purchasePrice +
+                ", currentPrice=" + currentPrice +
+                '}';
+    }
 }
 

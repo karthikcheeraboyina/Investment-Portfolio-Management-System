@@ -1,8 +1,12 @@
-// src/main/java/com/example/service/ReportService.java
 package com.example.ipmsBackend.service;
 
 import com.example.ipmsBackend.entity.Report;
+import com.example.ipmsBackend.entity.ReportType;
+import com.example.ipmsBackend.entity.Asset;
+import com.example.ipmsBackend.entity.Risk;
 import com.example.ipmsBackend.repository.ReportRepository;
+import com.example.ipmsBackend.repository.AssetRepository;
+import com.example.ipmsBackend.repository.RiskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,53 +15,55 @@ import java.util.List;
 @Service
 public class ReportServiceImpl implements ReportService {
 
+    private final ReportRepository reportRepository;
+    private final AssetRepository assetRepository;
+    private RiskRepository riskRepository;
+
+
     @Autowired
-    private ReportRepository reportRepository;
+    public ReportServiceImpl(ReportRepository reportRepository, AssetRepository assetRepository, RiskRepository riskRepository) {
+        this.reportRepository = reportRepository;
+        this.assetRepository = assetRepository;
+        this.riskRepository = riskRepository;
+    }
 
-    public Report generatePortfolioReport(Long portfolioId, String reportTitle) {
-        // Business logic to generate report
-        Report report = new Report(portfolioId, "PORTFOLIO", reportTitle);
+    @Override
+    public Report generateReport(Long userId ,Long portfolioId, ReportType reportType, String title) {
+        String content = "";
+        if (reportType == ReportType.PORTFOLIO || reportType == ReportType.ASSETS) {
+            List<Asset> assets = assetRepository.findByPortfolio_PortfolioId(portfolioId);
+            StringBuilder sb = new StringBuilder();
+            sb.append(reportType == ReportType.PORTFOLIO ? "Portfolio Report" : "Assets Report")
+                    .append(" for Portfolio ID: ").append(portfolioId).append("\nAssets:\n");
+            for (Asset asset : assets) {
+                sb.append("Name: ").append(asset.getAssetName())
+                        .append(", Type: ").append(asset.getAssetType())
+                        .append(", Quantity: ").append(asset.getQuantity())
+                        .append(", Purchase Price: ").append(asset.getPurchasePrice())
+                        .append(", Current Price: ").append(asset.getCurrentPrice())
+                        .append("\n");
+            }
+            content = sb.toString();
+        } else if (reportType == ReportType.RISK) {
+            List<Risk> risks = riskRepository.findByPortfolio_PortfolioId(portfolioId);
+            if (!risks.isEmpty()) {
+                Risk latestRisk = risks.get(risks.size() - 1); // or use your own logic to pick the latest
+                content = "Risk Report for Portfolio ID: " + portfolioId + "\n"
+                        + "Risk Level: " + latestRisk.getRiskLevel() + "\n"
+                        + "Analysis Date: " + latestRisk.getAnalysisDate();
+            } else {
+                content = "Risk Report for Portfolio ID: " + portfolioId + "\nNo risk analysis available.";
+            }
+        }
+        Report report = new Report(null, reportType, portfolioId, title, content);
         return reportRepository.save(report);
     }
 
-    public Report generateRiskReport(Long portfolioId, String reportTitle) {
-        Report report = new Report(portfolioId, "RISK", reportTitle);
-        return reportRepository.save(report);
-    }
-
-    public Report generateAssetAnalysisReport(Long portfolioId, String reportTitle) {
-        Report report = new Report(portfolioId, "ASSET_ANALYSIS", reportTitle);
-        return reportRepository.save(report);
-    }
-
+    @Override
     public List<Report> getPortfolioReports(Long portfolioId) {
         return reportRepository.findByPortfolioId(portfolioId);
     }
 
-    public List<Report> getReportsByType(String reportType) {
-        return reportRepository.findByType(reportType);
-    }
 
-    public List<Report> getPortfolioReportsByType(Long portfolioId, String reportType) {
-        return reportRepository.findByPortfolioIdAndType(portfolioId, reportType);
-    }
 
-    public List<Report> getReportsByDateRange(String startDate, String endDate) {
-        return reportRepository.findByDateRange(startDate, endDate);
-    }
-
-    public List<Report> getPortfolioReportsByDateRange(Long portfolioId, String startDate, String endDate) {
-        return reportRepository.findByPortfolioIdAndDateRange(portfolioId, startDate, endDate);
-    }
-
-    public Long getReportCountByType(Long portfolioId, String reportType) {
-        return reportRepository.countByPortfolioIdAndType(portfolioId, reportType);
-    }
-
-    public Report updateReport(Long reportId, Report reportData) {
-        Report report = reportRepository.findById(reportId).orElseThrow();
-        report.setTitle(reportData.getTitle());
-        report.setContent(reportData.getContent());
-        return reportRepository.save(report);
-    }
 }

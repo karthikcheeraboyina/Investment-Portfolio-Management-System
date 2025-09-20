@@ -60,4 +60,15 @@ public class Portfolio {
     public void setAssets(List<Asset> assets) {
         this.assets = assets;
     }
+
+    @Override
+    public String toString() {
+        return "Portfolio{" +
+                "portfolioId=" + portfolioId +
+                ", userId=" + userId +
+                ", portfolioName='" + portfolioName + '\'' +
+                ", creationDate=" + creationDate +
+                ", assets=" + assets +
+                '}';
+    }
 }

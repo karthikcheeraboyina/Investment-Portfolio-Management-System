@@ -1,67 +1,37 @@
-// src/main/java/com/example/controller/ReportController.java
 package com.example.ipmsBackend.controller;
 
 import com.example.ipmsBackend.entity.Report;
-import com.example.ipmsBackend.service.ReportServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.ipmsBackend.entity.ReportType;
+import com.example.ipmsBackend.service.ReportService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/reports")
+@CrossOrigin(origins = "*")
 public class ReportController {
 
-    @Autowired
-    private ReportServiceImpl reportService;
+    private final ReportService reportService;
 
-    @PostMapping("/portfolio/{portfolioId}")
-    public Report generatePortfolioReport(@PathVariable Long portfolioId, @RequestParam(required = false) String reportTitle) {
-        return reportService.generatePortfolioReport(portfolioId, reportTitle);
+    public ReportController(ReportService reportService) {
+        this.reportService = reportService;
     }
 
-    @PostMapping("/risk/{portfolioId}")
-    public Report generateRiskReport(@PathVariable Long portfolioId, @RequestParam(required = false) String reportTitle) {
-        return reportService.generateRiskReport(portfolioId, reportTitle);
-    }
-
-    @PostMapping("/asset-analysis/{portfolioId}")
-    public Report generateAssetAnalysisReport(@PathVariable Long portfolioId, @RequestParam(required = false) String reportTitle) {
-        return reportService.generateAssetAnalysisReport(portfolioId, reportTitle);
+    @PostMapping("/generate")
+    public ResponseEntity<Report> generateReport(
+            @RequestParam Long userId,
+            @RequestParam Long portfolioId,
+            @RequestParam ReportType reportType,
+            @RequestParam(required = false) String title) {
+        Report report = reportService.generateReport(userId, portfolioId, reportType, title);
+        return ResponseEntity.ok(report);
     }
 
     @GetMapping("/portfolio/{portfolioId}")
-    public List<Report> getPortfolioReports(@PathVariable Long portfolioId) {
-        return reportService.getPortfolioReports(portfolioId);
+    public ResponseEntity<List<Report>> getPortfolioReports(@PathVariable Long portfolioId) {
+        return ResponseEntity.ok(reportService.getPortfolioReports(portfolioId));
     }
 
-    @GetMapping("/type/{reportType}")
-    public List<Report> getReportsByType(@PathVariable String reportType) {
-        return reportService.getReportsByType(reportType);
-    }
-
-    @GetMapping("/portfolio/{portfolioId}/type/{reportType}")
-    public List<Report> getPortfolioReportsByType(@PathVariable Long portfolioId, @PathVariable String reportType) {
-        return reportService.getPortfolioReportsByType(portfolioId, reportType);
-    }
-
-    @GetMapping("/daterange")
-    public List<Report> getReportsByDateRange(@RequestParam String startDate, @RequestParam String endDate) {
-        return reportService.getReportsByDateRange(startDate, endDate);
-    }
-
-    @GetMapping("/portfolio/{portfolioId}/daterange")
-    public List<Report> getPortfolioReportsByDateRange(@PathVariable Long portfolioId, @RequestParam String startDate, @RequestParam String endDate) {
-        return reportService.getPortfolioReportsByDateRange(portfolioId, startDate, endDate);
-    }
-
-    @GetMapping("/portfolio/{portfolioId}/count/{reportType}")
-    public Long getReportCountByType(@PathVariable Long portfolioId, @PathVariable String reportType) {
-        return reportService.getReportCountByType(portfolioId, reportType);
-    }
-
-    @PutMapping("/{reportId}")
-    public Report updateReport(@PathVariable Long reportId, @RequestBody Report reportData) {
-        return reportService.updateReport(reportId, reportData);
-    }
 }

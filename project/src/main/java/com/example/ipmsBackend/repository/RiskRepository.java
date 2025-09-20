@@ -6,12 +6,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface RiskRepository extends JpaRepository<Risk, Long> {
-     Optional<Risk> findByPortfolio_PortfolioId(Long portfolioId);
-
+    //Optional<Risk> findByPortfolio_PortfolioId(Long portfolioId);
+     List<Risk> findByPortfolio_PortfolioId(Long portfolioId);
       Optional<Risk> findLatestByPortfolio_PortfolioId(@Param("portfolioId") Long portfolioId);
 
 
