@@ -63,7 +63,4 @@ public class ReportServiceImpl implements ReportService {
     public List<Report> getPortfolioReports(Long portfolioId) {
         return reportRepository.findByPortfolioId(portfolioId);
     }
-
-
-
 }

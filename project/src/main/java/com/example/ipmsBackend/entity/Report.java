@@ -10,7 +10,7 @@ import lombok.*;
 public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long reportId;
+    private Long Id;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
