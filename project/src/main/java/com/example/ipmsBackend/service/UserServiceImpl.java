@@ -2,6 +2,7 @@ package com.example.ipmsBackend.service;
 
 import com.example.ipmsBackend.entity.User;
 import com.example.ipmsBackend.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +15,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-    // This is the manually written constructor for dependency injection
+    @Autowired
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -55,32 +56,5 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(existingUser);
     }
 
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-    public Optional<User> getUserById(Long userId) {
-        return userRepository.findById(userId);
-    }
-
-//    public Optional<User> getUserByUsername(String username) {
-//        return userRepository.findByUsername(username);
-//    }
-
-    public List<User> getUsersByRole(User.UserRole role) {
-        return userRepository.findByRole(role);
-    }
-
-    public List<User> searchUsers(String keyword) {
-        return userRepository.findByUsernameContainingOrEmailContaining(keyword, keyword);
-    }
-
-    public void deleteUser(Long userId) {
-        userRepository.deleteById(userId);
-    }
-
-    public long getUsersCountByRole(User.UserRole role) {
-        return userRepository.countByRole(role);
-    }
 
 }

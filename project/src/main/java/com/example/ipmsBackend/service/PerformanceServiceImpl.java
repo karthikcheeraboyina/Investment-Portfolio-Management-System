@@ -43,11 +43,11 @@ public class PerformanceServiceImpl implements PerformanceService {
 
         // Calculate the total current market value of the holding.
         // totalCurrentValue = newCurrentPrice * quantity
-        BigDecimal totalCurrentValue = newCurrentPrice.multiply(asset.getQuantity());
+        BigDecimal totalCurrentValue = newCurrentPrice;
 
         // Calculate the total profit or loss.
         // profitLoss = totalCurrentValue - totalPurchaseCost
-        BigDecimal profitLoss = totalCurrentValue.subtract(totalPurchaseCost);
+        BigDecimal profitLoss = totalCurrentValue.multiply(asset.getQuantity()).subtract(totalPurchaseCost);
 
 
 

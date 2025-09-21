@@ -10,11 +10,4 @@ public interface UserService {
     Optional<User> loginUser(String username, String password);
     User updateUserProfile(Long userId, User updatedUser);
 
-    List<User> getAllUsers();
-    Optional<User> getUserById(Long userId);
-    List<User> getUsersByRole(User.UserRole role);
-    List<User> searchUsers(String keyword);
-
-    void deleteUser(Long userId);
-    long getUsersCountByRole(User.UserRole role);
 }

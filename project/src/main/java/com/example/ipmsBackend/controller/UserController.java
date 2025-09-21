@@ -2,6 +2,7 @@ package com.example.ipmsBackend.controller;
 
 import com.example.ipmsBackend.entity.User;
 import com.example.ipmsBackend.service.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,7 @@ public class UserController {
 
     private final UserServiceImpl userService;
 
-    // This is the single, manual constructor for dependency injection
+    @Autowired
     public UserController(UserServiceImpl userService) {
         this.userService = userService;
     }
@@ -46,41 +47,5 @@ public class UserController {
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-    }
-
-    @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
-        List<User> users = userService.getAllUsers();
-        return ResponseEntity.ok(users);
-    }
-
-    @GetMapping("/{userId}")
-    public ResponseEntity<User> getUserById(@PathVariable Long userId) {
-        Optional<User> user = userService.getUserById(userId);
-        return user.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
-    }
-
-    @GetMapping("/search")
-    public ResponseEntity<List<User>> searchUsers(@RequestParam String keyword) {
-        List<User> users = userService.searchUsers(keyword);
-        return ResponseEntity.ok(users);
-    }
-
-    @GetMapping("/role/{role}")
-    public ResponseEntity<List<User>> getUsersByRole(@PathVariable User.UserRole role) {
-        List<User> users = userService.getUsersByRole(role);
-        return ResponseEntity.ok(users);
-    }
-
-    @DeleteMapping("/{userId}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
-        userService.deleteUser(userId);
-        return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping("/stats/role/{role}")
-    public ResponseEntity<Long> getUsersCountByRole(@PathVariable User.UserRole role) {
-        long count = userService.getUsersCountByRole(role);
-        return ResponseEntity.ok(count);
     }
 }
