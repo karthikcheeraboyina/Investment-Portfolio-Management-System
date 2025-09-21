@@ -24,44 +24,29 @@ public class PerformanceServiceImpl implements PerformanceService {
         this.performanceRepository = performanceRepository;
     }
 
-
+    @Override
     @Transactional
     public Performance calculateAndSavePerformance(Long assetId, BigDecimal newCurrentPrice) {
-        // 1. Fetch the Asset to get its purchase price and quantity.
+
         Asset asset = assetRepository.findById(assetId)
                 .orElseThrow(() -> new EntityNotFoundException("Asset not found with ID: " + assetId));
 
-        // 2. Find the existing performance record or create a new one.
+        asset.setCurrentPrice(newCurrentPrice);
+
+        assetRepository.save(asset);
+
         Performance performance = performanceRepository.findByAsset_AssetId(assetId)
                 .orElse(new Performance());
 
-
-
-        // Calculate the total cost of the initial purchase.
-        // totalPurchaseCost = purchasePrice * quantity
-        BigDecimal totalPurchaseCost = asset.getPurchasePrice().multiply(asset.getQuantity());
-
-        // Calculate the total current market value of the holding.
-        // totalCurrentValue = newCurrentPrice * quantity
         BigDecimal totalCurrentValue = newCurrentPrice.multiply(asset.getQuantity());
-
-        // Calculate the total profit or loss.
-        // profitLoss = totalCurrentValue - totalPurchaseCost
+        BigDecimal totalPurchaseCost = asset.getPurchasePrice().multiply(asset.getQuantity());
         BigDecimal profitLoss = totalCurrentValue.subtract(totalPurchaseCost);
 
-
-
-        // 3. Update the asset's current price for consistency.
-        asset.setCurrentPrice(newCurrentPrice);
-        assetRepository.save(asset);
-
-        // 4. Update the performance record with the new calculations.
-        performance.setAsset(asset); // Link to the asset
-        performance.setCurrentValue(totalCurrentValue); // Store the total value of the holding
+        performance.setAsset(asset);
+        performance.setCurrentValue(totalCurrentValue);
         performance.setProfitLoss(profitLoss);
         performance.setLastUpdated(LocalDate.now());
 
-        // 5. Save the updated performance record.
         return performanceRepository.save(performance);
     }
 }
