@@ -38,6 +38,9 @@ public class User {
     @Column(nullable = false)
     private UserRole role = UserRole.INVESTOR;
 
+    public void setId(long l) {
+    }
+
     public enum UserRole {
         INVESTOR, ADMIN
     }
